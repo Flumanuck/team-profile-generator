@@ -172,16 +172,6 @@ function createHtml() {
       );
     }
   });
-
-  htmlArray.forEach((element) => {
-    console.log(element);
-  });
-}
-
-function arrayPush() {
-  return htmlArray.join("");
 }
 
 addNewEmployee();
-
-///module.exports = { htmlArray: htmlArray };
