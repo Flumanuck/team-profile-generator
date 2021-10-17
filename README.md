@@ -25,3 +25,5 @@ This application creates an html file with user inputs using inquirer to dynamic
 ## Test
 
 In the terminal, type "npm run test" to run the testing files.
+
+![screenshot of application](https://github.com/Flumanuck/team-profile-generator/blob/main/screenshot.PNG?raw=true)
