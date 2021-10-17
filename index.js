@@ -156,19 +156,19 @@ function createHtml() {
       const { name, id, email, github } = employee;
 
       htmlArray.push(
-        `<h2>Engineer</h2><ul class=border><li>${name}</li><li>${id}</li><li><a href="mailto:${email}">${email}</a></li><li><a href="https://github.com/${github}">${github}</a></li></ul>`
+        `<div class="border"><h2 class="header">Engineer</h2><ul><li>${name}</li><li>${id}</li><li><a href="mailto:${email}">${email}</a></li><li><a href="https://github.com/${github}">${github}</a></li></ul></div>`
       );
     } else if (employee.getRole() == "Intern") {
       const { name, id, email, school } = employee;
 
       htmlArray.push(
-        `<h2>Intern</h2><ul class=border><li>${name}</li><li>${id}</li><li><a href="mailto:${email}">${email}</a></li><li>${school}</li></ul>`
+        `<div class="border"><h2 class="header">Intern</h2><ul><li>${name}</li><li>${id}</li><li><a href="mailto:${email}">${email}</a></li><li>${school}</li></ul></div>`
       );
     } else if (employee.getRole() == "Manager") {
       const { name, id, email, officeNumber } = employee;
 
       htmlArray.push(
-        `<h2>Manager</h2><ul class=border><li>${name}</li><li>${id}</li><li><a href="mailto:${email}">${email}</a></li><li>${officeNumber}</li></ul>`
+        `<div class="border"><h2 class="header">Manager</h2><ul class><li>${name}</li><li>${id}</li><li><a href="mailto:${email}">${email}</a></li><li>${officeNumber}</li></ul></div>`
       );
     }
   });

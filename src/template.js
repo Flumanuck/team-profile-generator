@@ -6,9 +6,10 @@ function makeHtmlTemplate(array) {
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Team</title>
+  <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
-  <header class="header">My Team</header>
+  <header><h1>My Team</h1></header>
   <div id="employees">
   ${array.join("")}
   </div>
