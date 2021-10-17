@@ -9,7 +9,7 @@
 
 ## Description
 
-This application dynamically creates an html file with user inputs using inquirer to create a list of team members for the user's company.
+This application creates an html file with user inputs using inquirer to dynamically create a list of team members for the user's company.
 
 ## Installation
 
