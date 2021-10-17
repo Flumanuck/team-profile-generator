@@ -1,10 +1,13 @@
 const inquirer = require("inquirer");
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
+const Intern = require("./lib/Intern");
 const path = require("path");
 const fs = require("fs");
+const htmlTemplate = require("./src/template");
 
 const teamArray = [];
+const htmlArray = [];
 
 function makeManager() {
   inquirer
@@ -24,16 +27,21 @@ function makeManager() {
         name: "managerEmail",
         message: "What is your manager's Email?",
       },
+      {
+        type: "input",
+        name: "managerOfficeNo",
+        message: "What is your manager's office number?",
+      },
     ])
     .then(function (data) {
       const newManager = new Manager(
         data.managerName,
         data.managerId,
-        data.managerEmail
+        data.managerEmail,
+        data.managerOfficeNo
       );
-      //add data.managerOfficeNo later
       teamArray.push(newManager);
-      //console.log(teamArray);
+      addNewEmployee();
     });
 }
 function makeEngineer() {
@@ -54,16 +62,127 @@ function makeEngineer() {
         name: "engineerEmail",
         message: "What is your engineer's Email?",
       },
+      {
+        type: "input",
+        name: "engineerGithub",
+        message: "What is your engineer's Github?",
+      },
     ])
     .then(function (data) {
       const newEngineer = new Engineer(
         data.engineerName,
         data.engineerId,
-        data.engineerEmail
+        data.engineerEmail,
+        data.engineerGithub
       );
-      //add data.engineerGithub later
       teamArray.push(newEngineer);
-      console.log(teamArray);
+      addNewEmployee();
     });
 }
-function addNewEmployee() {}
+function makeIntern() {
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "internName",
+        message: "What is your intern's name?",
+      },
+      {
+        type: "input",
+        name: "internId",
+        message: "What is your intern's id?",
+      },
+      {
+        type: "input",
+        name: "internEmail",
+        message: "What is your intern's Email?",
+      },
+      {
+        type: "input",
+        name: "internSchool",
+        message: "What is your intern's school?",
+      },
+    ])
+    .then(function (data) {
+      const newIntern = new Intern(
+        data.internName,
+        data.internId,
+        data.internEmail,
+        data.internSchool
+      );
+      teamArray.push(newIntern);
+      addNewEmployee();
+    });
+}
+function addNewEmployee() {
+  inquirer
+    .prompt([
+      {
+        type: "list",
+        name: "employeeType",
+        message: "What employee do you want to add?",
+        choices: ["Engineer", "Intern", "Manager", "None"],
+      },
+    ])
+    .then(function (data) {
+      const { employeeType } = data;
+      if (employeeType == "Engineer") {
+        makeEngineer();
+      } else if (employeeType == "Intern") {
+        makeIntern();
+      } else if (employeeType == "Manager") {
+        makeManager();
+      } else {
+        createHtml();
+        return;
+      }
+    });
+}
+
+function writeToFile(fileName, data) {
+  fs.writeFile(fileName, data, function (err) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("Success!");
+    }
+  });
+}
+
+function createHtml() {
+  teamArray.forEach((employee) => {
+    if (employee.getRole() == "Engineer") {
+      const { name, id, email, github } = employee;
+
+      htmlArray.push(
+        `<h2>Engineer</h2><ul class = border><li>${name}</li><li>${id}</li><li><a href="mailto:${email}">${email}</a></li><li><a href="https://github.com/${github}">${github}</a></li></ul>`
+      );
+    } else if (employee.getRole() == "Intern") {
+      const { name, id, email, school } = employee;
+
+      htmlArray.push(
+        `<h2>Intern</h2><ul class= border><li>${name}</li><li>${id}</li><li><a href="mailto:${email}">${email}</a></li><li>${school}</li></ul>`
+      );
+    } else if (employee.getRole() == "Manager") {
+      const { name, id, email, officeNumber } = employee;
+
+      htmlArray.push(
+        `<h2>Manager</h2><ul class=border><li>${name}</li><li>${id}</li><li><a href="mailto:${email}">${email}</a></li><li>${officeNumber}</li></ul>`
+      );
+    }
+  });
+
+  htmlArray.forEach((element) => {
+    console.log(element);
+  });
+}
+
+function arrayPush() {
+  return htmlArray.join("");
+}
+
+writeToFile("dist/index.html", htmlTemplate);
+
+addNewEmployee();
+
+module.exports = { arrayPush: arrayPush };
