@@ -1,6 +1,5 @@
-const arrayPush = require("../index");
-console.log(arrayPush);
-const htmlTemplate = `<!DOCTYPE html>
+function makeHtmlTemplate(array) {
+  const htmlTemplate = `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -11,9 +10,10 @@ const htmlTemplate = `<!DOCTYPE html>
 <body>
   <header class="header">My Team</header>
   <div id="employees">
-  ${arrayPush()}
+  ${array.join("")}
   </div>
 </body>
 </html>`;
-
-module.exports = htmlTemplate;
+  return htmlTemplate;
+}
+module.exports = makeHtmlTemplate;

@@ -4,7 +4,7 @@ const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const path = require("path");
 const fs = require("fs");
-const htmlTemplate = require("./src/template");
+const makeHtmlTemplate = require("./src/template");
 
 const teamArray = [];
 const htmlArray = [];
@@ -134,6 +134,7 @@ function addNewEmployee() {
         makeManager();
       } else {
         createHtml();
+        writeToFile("dist/index.html", makeHtmlTemplate(htmlArray));
         return;
       }
     });
@@ -155,13 +156,13 @@ function createHtml() {
       const { name, id, email, github } = employee;
 
       htmlArray.push(
-        `<h2>Engineer</h2><ul class = border><li>${name}</li><li>${id}</li><li><a href="mailto:${email}">${email}</a></li><li><a href="https://github.com/${github}">${github}</a></li></ul>`
+        `<h2>Engineer</h2><ul class=border><li>${name}</li><li>${id}</li><li><a href="mailto:${email}">${email}</a></li><li><a href="https://github.com/${github}">${github}</a></li></ul>`
       );
     } else if (employee.getRole() == "Intern") {
       const { name, id, email, school } = employee;
 
       htmlArray.push(
-        `<h2>Intern</h2><ul class= border><li>${name}</li><li>${id}</li><li><a href="mailto:${email}">${email}</a></li><li>${school}</li></ul>`
+        `<h2>Intern</h2><ul class=border><li>${name}</li><li>${id}</li><li><a href="mailto:${email}">${email}</a></li><li>${school}</li></ul>`
       );
     } else if (employee.getRole() == "Manager") {
       const { name, id, email, officeNumber } = employee;
@@ -181,8 +182,6 @@ function arrayPush() {
   return htmlArray.join("");
 }
 
-writeToFile("dist/index.html", htmlTemplate);
-
 addNewEmployee();
 
-module.exports = { arrayPush: arrayPush };
+///module.exports = { htmlArray: htmlArray };
