@@ -6,6 +6,8 @@
 - [Installation](#installation)
 - [Usage](#usage)
 - [Test](#test)
+- [Screenshot](#screenshot)
+- [Video Example](#video-example)
 
 ## Description
 
@@ -25,3 +27,10 @@ This application creates an html file with user inputs using inquirer to dynamic
 ## Test
 
 In the terminal, type "npm run test" to run the testing files.
+
+## Screenshot
+
+![screenshot of application](https://github.com/Flumanuck/team-profile-generator/blob/main/screenshot.PNG?raw=true)
+
+## Video-Example
+https://drive.google.com/file/d/1Wlu1kBaj2ZY69GHCVyOAqJqY4vDuHl8b/view
